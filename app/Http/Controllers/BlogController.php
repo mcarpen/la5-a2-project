@@ -55,7 +55,7 @@ class BlogController extends Controller
             'title'     => 'required',
             'body'      => 'required',
             'status'    => 'required',
-            'postmedia' => 'required',
+            'postmedia' => 'required|image',
         ]);
 
         $postMedia = $request->file('postmedia');
