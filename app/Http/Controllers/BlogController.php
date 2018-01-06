@@ -6,6 +6,7 @@ use App\Favorite;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -51,18 +52,25 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title'  => 'required',
-            'body'   => 'required',
-            'status' => 'required',
+            'title'     => 'required',
+            'body'      => 'required',
+            'status'    => 'required',
+            'postmedia' => 'required',
         ]);
 
+        $postMedia = $request->file('postmedia');
 
-        $post          = new Post;
-        $post->user_id = $request->user()->id;
-        $post->title   = $request->get('title');
-        $post->slug    = str_slug($request->get('title'));
-        $post->body    = $request->get('body');
-        $post->status  = $request->get('status');
+        $path = Storage::putFileAs(
+            'medias', $postMedia, $postMedia->getClientOriginalName()
+        );
+
+        $post           = new Post;
+        $post->user_id  = $request->user()->id;
+        $post->title    = $request->get('title');
+        $post->slug     = str_slug($request->get('title'));
+        $post->body     = $request->get('body');
+        $post->status   = $request->get('status');
+        $post->filename = $path;
         $post->save();
 
         return redirect()->route('blog.index');
@@ -75,12 +83,15 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post     = Post::where('slug', $slug)->first();
         $favCount = $post->favorites()->count();
 
         if ( ! $post) {
             return redirect()->route('blog.index');
         }
+
+        $url      = Storage::url($post->filename);
+        $mediaUrl = asset($url);
 
         if ( ! Auth::guest()) {
             $userId = Auth::user()->id;
@@ -90,12 +101,12 @@ class BlogController extends Controller
             ])->exists();
 
             if ($inFav) {
-                return view('blog.show', compact('post', 'inFav', 'favCount'));
+                return view('blog.show', compact('post', 'inFav', 'favCount', 'mediaUrl'));
             } else {
-                return view('blog.show', compact('post', 'favCount'));
+                return view('blog.show', compact('post', 'favCount', 'mediaUrl'));
             }
         } else {
-            return view('blog.show', compact('post', 'favCount'));
+            return view('blog.show', compact('post', 'favCount', 'mediaUrl'));
         }
     }
 
