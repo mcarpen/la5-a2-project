@@ -30,4 +30,9 @@ class User extends Authenticatable
     public function articles() {
         return $this->hasMany(Post::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

@@ -15,6 +15,9 @@ Route::get('/', 'WelcomeController@welcome');
 Route::get('/mes-articles', 'UserController@articles');
 
 Route::resource('/blog', 'BlogController');
+
+Route::get('/blog/{slug}/fav', ['as' => 'favorite.manage', 'uses' => 'FavoriteController@manage']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
