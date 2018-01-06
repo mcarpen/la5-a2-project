@@ -18,7 +18,7 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <form action="{{ route('blog.store') }}" method="POST">
+                        <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
 
@@ -36,6 +36,10 @@
                                     <option value="0">Brouillon</option>
                                     <option value="1">Publié</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input name="postmedia" type="file">
                             </div>
 
                             <button class="btn center-block">Sauvegarder</button>
