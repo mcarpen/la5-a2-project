@@ -14,4 +14,9 @@ class Post extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

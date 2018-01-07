@@ -21,3 +21,5 @@ Route::get('/blog/{slug}/fav', ['as' => 'favorite.manage', 'uses' => 'FavoriteCo
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::resource('/comment', 'CommentController');
+Route::post('/blog/{slug}/comments', ['as' => 'comment.store', 'uses' => 'CommentController@store']);
