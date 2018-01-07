@@ -19,7 +19,7 @@ class ConversationController extends Controller
     {
         $currentUser = Auth::id();
 
-        $conversations = Conversation::where('user_one', '=', $currentUser)->orWhere('user_two', '=', $currentUser)->get();
+        $conversations = Conversation::where('user_one', '=', $currentUser)->orWhere('user_two', '=', $currentUser)->orderBy('created_at', 'desc')->get();
 
         return view('message.index', compact('conversations'));
     }

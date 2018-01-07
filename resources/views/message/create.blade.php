@@ -7,7 +7,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1>Envoyer un message</h1>
+                        <h1>Send message</h1>
                     </div>
 
                     <div class="panel-body">
@@ -33,7 +33,7 @@
                                 </select>
                             </div>
 
-                            <button class="btn btn btn-primary center-block">Envoyer !</button>
+                            <button class="btn btn btn-primary center-block">Send!</button>
                         </form>
                     </div>
                 </div>
