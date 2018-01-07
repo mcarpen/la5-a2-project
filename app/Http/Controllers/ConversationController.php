@@ -56,6 +56,6 @@ class ConversationController extends Controller
 
         $messages = Message::where('conversation_id', '=', $conversation->id)->orderBy('created_at', 'desc')->get();
 
-        return view('message.conv', compact('messages'));
+        return view('message.conv', compact('messages', 'conversation', 'username'));
     }
 }

@@ -64,4 +64,24 @@ class MessageController extends Controller
 
         return redirect()->route('message.create');
     }
+
+    public function response(Request $request, $username)
+    {
+        $this->validate($request, [
+            'convId'     => 'required',
+            'content'      => 'required|min:1',
+        ]);
+
+        $message = new Message();
+        $message->content = $request->get('content');
+        $message->conversation_id = $request->get('convId');
+        $message->user_id = Auth::id();
+        $message->save();
+
+        $conv = Conversation::where('id', '=', $request->get('convId'))->first();
+        $conv->last_message = $message->id;
+        $conv->save();
+
+        return redirect()->route('message.conv', $username);
+    }
 }

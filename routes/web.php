@@ -27,4 +27,5 @@ Route::post('/blog/{slug}/comments', ['as' => 'comment.store', 'uses' => 'Commen
 Route::get('/messages', ['as' => 'message.index', 'uses' => 'ConversationController@index']);
 Route::get('/message/create', ['as' => 'message.create', 'uses' => 'MessageController@create']);
 Route::post('/message/store', ['as' => 'message.store', 'uses' => 'MessageController@store']);
+Route::post('/messages/response/{username}', ['as' => 'message.response', 'uses' => 'MessageController@response']);
 Route::get('/messages/{username}', ['as' => 'message.conv', 'uses' => 'ConversationController@show']);
