@@ -27,7 +27,9 @@
                             {{ $favCount }} likes ~
                         @endif
                     </span>
-                    @if(!Auth::guest())
+                    @guest
+                        <span>Connectes-toi pour aimer l'article !</span>
+                    @else
                         <a href="{{ route('favorite.manage', $post->id) }}">
                             @isset($inFav)
                                 Je n'aime plus l'article
@@ -35,9 +37,7 @@
                                 J'aime l'article
                             @endisset
                         </a>
-                    @else
-                        <span>Connectes-toi pour aimer l'article !</span>
-                    @endif
+                    @endguest
                 </div>
             </div>
         </div>
