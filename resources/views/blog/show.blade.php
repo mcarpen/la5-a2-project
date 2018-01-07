@@ -19,49 +19,57 @@
                     <p>
                         {{ $post->body }}
                     </p>
-
-                    <div class="comments">
-
-                        <ul class="list-group">
-
-                        @foreach ($post->comments as $comment)
-
-                            <li class="list-group-item">
-
-                                <strong>
-
-                                    {{ $comment->created_at->diffForHumans() }}:
-
-                                </strong>
-
-                                {{ $comment ->body }}
-
-                            </li>
-
-                         @endforeach
-
-                        </ul>
-
-                    </div>
-
                 </div>
 
         <div class="card">
              <div class="card-block">
-                 <form action="{{ route('comment.store') }}" method="POST">
+                 <div class="comments">
 
-                     {{ csrf_field() }}
+                     <ul class="list-group">
+
+                         @foreach ($post->comments as $comment)
+
+                             <li class="list-group-item">
+
+                                 <strong>
+
+                                     {{ $comment->created_at->diffForHumans() }}:
+
+                                 </strong>
+
+                                 {{ $comment->body }}
+
+                                 <br>
+                                 <p>By {{ $comment->user->name }}</p>
+
+                             </li>
+
+                         @endforeach
+
+                     </ul>
+
+                 </div>
+
+                 @guest
+                     <p>You must be connected to post a comment!</p>
+                 @else
+                     <form action="{{ route('comment.store', $post->slug) }}" method="POST">
+
+                         {{ csrf_field() }}
 
 
-                     <div class="form-group">
-                         <textarea name="body" placeholder="your comment here" class="form-control"> </textarea>
-                     </div>
+                         <div class="form-group">
+                             <textarea name="body" placeholder="Your comment here" class="form-control"> </textarea>
+                         </div>
 
-                     <div class="form-group">
-                         <button type="submit" class="btn btn-primary">Add a comment </button>
-                     </div>
+                         <div class="form-group">
+                             <button type="submit" class="btn btn-primary">Add a comment </button>
+                         </div>
 
-                 </form>
+                         <input type="hidden" name="postId" value="{{ $post->id }}">
+
+                     </form>
+                 @endguest
 
              </div>
         </div>
