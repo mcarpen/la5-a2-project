@@ -29,3 +29,6 @@ Route::get('/message/create', ['as' => 'message.create', 'uses' => 'MessageContr
 Route::post('/message/store', ['as' => 'message.store', 'uses' => 'MessageController@store']);
 Route::post('/messages/response/{username}', ['as' => 'message.response', 'uses' => 'MessageController@response']);
 Route::get('/messages/{username}', ['as' => 'message.conv', 'uses' => 'ConversationController@show']);
+
+Route::get('/contact', ['as' => 'contact.create', 'uses' => 'ContactController@create']);
+Route::post('/contact/store', ['as' => 'contact.store', 'uses' => 'ContactController@store']);
