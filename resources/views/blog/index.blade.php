@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1>Liste des articles</h1>
+                        <h1>Articles' list</h1>
                     </div>
 
                     <div class="panel-body">
@@ -17,7 +17,7 @@
                                     {{ $post->body }}
                                 </p>
                                 <a href="{{route('blog.show', $post->slug)}}" class="btn btn-primary">
-                                    Voir
+                                    View more!
                                 </a>
                             </div>
                         @endforeach

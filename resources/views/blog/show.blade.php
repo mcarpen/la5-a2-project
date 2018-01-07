@@ -8,36 +8,31 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <img src="{{ $mediaUrl }}" alt="">
-                        <h2>
-                            {{ $post->title }}
-
-                            @if($post->user)
-                                Auteur: {{ $post->user->name }}
-                            @endif
-                        </h2>
+                        <img src="{{ $mediaUrl }}" alt="" class="img-responsive img-thumbnail">
+                        <h2>{{ $post->title }}</h2>
+                        @if($post->user) <h4>Author: {{ $post->user->name }}</h4> @endif
                     </div>
-                    <p>
-                        {{ $post->body }}
-                    </p>
-                    <span>
-                        @if ($favCount <= 1)
-                            {{ $favCount }} like ~
-                        @else
-                            {{ $favCount }} likes ~
-                        @endif
-                    </span>
-                    @guest
-                        <span>Connectes-toi pour aimer l'article !</span>
-                    @else
-                        <a href="{{ route('favorite.manage', $post->id) }}">
-                            @isset($inFav)
-                                Je n'aime plus l'article
+                    <div class="panel-body">
+                        <p>{{ $post->body }}</p>
+                        <span>
+                            @if ($favCount <= 1)
+                                {{ $favCount }} like ~
                             @else
-                                J'aime l'article
-                            @endisset
-                        </a>
-                    @endguest
+                                {{ $favCount }} likes ~
+                            @endif
+                        </span>
+                        @guest
+                            <span>Please connect to like this article!</span>
+                        @else
+                            <a href="{{ route('favorite.manage', $post->id) }}">
+                                @isset($inFav)
+                                    Dislike it! :(
+                                @else
+                                    Like it! :)
+                                @endisset
+                            </a>
+                        @endguest
+                    </div>
                 </div>
 
         <div class="card">
