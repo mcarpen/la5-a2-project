@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -29,5 +29,19 @@ class User extends Authenticatable
     
     public function articles() {
         return $this->hasMany(Post::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function isAdmin(){
+        return (\Auth::check() && $this->role === 'admin');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
