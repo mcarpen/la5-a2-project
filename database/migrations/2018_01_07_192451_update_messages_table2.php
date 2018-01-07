@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateMessagesTable extends Migration
+class UpdateMessagesTable2 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class UpdateMessagesTable extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->nullable()->after('id');;
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('viewed')->unsigned()->default(0)->after('content');
         });
     }
 
@@ -27,8 +26,7 @@ class UpdateMessagesTable extends Migration
     public function down()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+            $table->dropColumn('viewed');
         });
     }
 }

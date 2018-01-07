@@ -18,23 +18,27 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <form action="{{ route('message.store') }}" method="POST">
-                            {{ csrf_field() }}
+                        @if(empty($users))
+                            <p>There are no friends to communicate with :'(</p>
+                        @else
+                            <form action="{{ route('message.store') }}" method="POST">
+                                {{ csrf_field() }}
 
-                            <div class="form-group {{ $errors->has('content') ? 'has-error' : ''}}">
-                                <textarea class="form-control" name="content" cols="30" rows="10" placeholder="Message">{{ old('content') }}</textarea>
-                            </div>
+                                <div class="form-group {{ $errors->has('content') ? 'has-error' : ''}}">
+                                    <textarea class="form-control" name="content" cols="30" rows="10" placeholder="Message">{{ old('content') }}</textarea>
+                                </div>
 
-                            <div class="form-group">
-                                <select name="user" class="form-control">
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <select name="user" class="form-control">
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <button class="btn btn btn-primary center-block">Send!</button>
-                        </form>
+                                <button class="btn btn btn-primary center-block">Send!</button>
+                            </form>
+                        @endempty
                     </div>
                 </div>
             </div>

@@ -42,7 +42,7 @@
                                 <input name="postmedia" type="file">
                             </div>
 
-                            <button class="btn center-block">Save!</button>
+                            <button class="btn btn-primary center-block">Save!</button>
                         </form>
                     </div>
                 </div>

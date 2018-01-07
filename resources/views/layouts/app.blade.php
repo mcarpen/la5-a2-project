@@ -40,7 +40,7 @@
                         <a href="{{route('blog.index')}}">Blog</a>
                     </li>
                     &nbsp;<li>
-                        <a href="">Contact</a>
+                        <a href="{{ route('contact.create') }}">Contact</a>
                     </li>
                 </ul>
 
