@@ -13,6 +13,7 @@ class BlogController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('isAdmin')->except(['index', 'show']);
     }
 
