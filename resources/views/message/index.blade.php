@@ -16,14 +16,14 @@
                                     @if($conv->lastFrom($conv->last_message) === Auth::user()->name)
                                         <strong>You:</strong> (to {{ $conv->toUser($conv) }})
                                     @else
-                                        <strong>{{ $conv->lastFrom($conv->last_message) }}:</strong>
+                                        <strong>@if($conv->lastMessage($conv->last_message)->viewed === 0) <span class="alert-info">[NEW]</span> @endif {{ $conv->lastFrom($conv->last_message) }}:</strong>
                                     @endif
                                     <br>
                                     <p>{{ $conv->lastMessage($conv->last_message)->content }}</p>
                                     <span>{{ $conv->lastMessage($conv->last_message)->created_at->diffForHumans() }}</span>
                                     <br>
                                     <div>
-                                        <a href="@if ($conv->lastFrom($conv->last_message) === Auth::user()->name) {{ route('message.conv', $conv->toUser($conv)) }} @else {{ route('message.conv', $conv->lastFrom($conv->last_message)) }} @endif" class="btn btn-primary">View conversation</a>
+                                        <a href="@if($conv->lastFrom($conv->last_message) === Auth::user()->name) {{ route('message.conv', $conv->toUser($conv)) }} @else {{ route('message.conv', $conv->lastFrom($conv->last_message)) }} @endif" class="btn btn-primary">View conversation</a>
                                     </div>
                                 </li>
                             @endforeach

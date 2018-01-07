@@ -86,7 +86,7 @@
                         </li>
                         <li><a href="{{ route('message.index') }}">
                                 <button class="btn btn-primary" type="button">
-                                    Messages <span class="badge">4</span>
+                                    Messages @if($newMessages > 0) <span class="badge">{{ $newMessages }}</span> @endif
                                 </button>
                             </a></li>
                     @endguest

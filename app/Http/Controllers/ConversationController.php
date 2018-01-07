@@ -12,6 +12,7 @@ class ConversationController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth');
     }
 
@@ -19,7 +20,7 @@ class ConversationController extends Controller
     {
         $currentUser = Auth::id();
 
-        $conversations = Conversation::where('user_one', '=', $currentUser)->orWhere('user_two', '=', $currentUser)->orderBy('created_at', 'desc')->get();
+        $conversations = Conversation::where('user_one', '=', $currentUser)->orWhere('user_two', '=', $currentUser)->orderBy('updated_at', 'desc')->get();
 
         return view('message.index', compact('conversations'));
     }
@@ -55,6 +56,13 @@ class ConversationController extends Controller
         }
 
         $messages = Message::where('conversation_id', '=', $conversation->id)->orderBy('created_at', 'desc')->get();
+
+        $checkRead = $messages->where('user_id', '!=', $currentUser);
+
+        foreach ($checkRead as $msg) {
+            $msg->viewed = 1;
+            $msg->save();
+        }
 
         return view('message.conv', compact('messages', 'conversation', 'username'));
     }
