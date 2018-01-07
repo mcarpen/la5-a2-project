@@ -23,3 +23,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::resource('/comment', 'CommentController');
 Route::post('/blog/{slug}/comments', ['as' => 'comment.store', 'uses' => 'CommentController@store']);
+
+Route::get('/message/create', ['as' => 'message.create', 'uses' => 'MessageController@create']);
+Route::post('/message/store', ['as' => 'message.store', 'uses' => 'MessageController@store']);
