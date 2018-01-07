@@ -24,12 +24,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-//        $posts = DB::table('posts')
-//            ->where('status', '1')
-//            ->where('slug', 'mon-article')
-//            ->get();
-
-        $posts = Post::all();
+        $posts = Post::where('status', '=', 1)->get();
 
         return view('blog.index', compact('posts'));
     }

@@ -29,7 +29,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    CC&MC's blog
                 </a>
             </div>
 
@@ -40,7 +40,7 @@
                         <a href="{{route('blog.index')}}">Blog</a>
                     </li>
                     &nbsp;<li>
-                        <a href="">Blog</a>
+                        <a href="">Contact</a>
                     </li>
                 </ul>
 
