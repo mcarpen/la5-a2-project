@@ -31,6 +31,7 @@ class BlogController extends Controller
         $posts = Post::all();
 
         return view('blog.index', compact('posts'));
+
     }
 
     /**
@@ -146,5 +147,12 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function adminIndex()
+    {
+        $posts = Post::all();
+
+        return view('admin.articles.index', compact('posts'));
     }
 }
